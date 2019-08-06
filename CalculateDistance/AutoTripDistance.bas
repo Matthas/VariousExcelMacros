@@ -125,6 +125,9 @@ Next i
 
 Worksheets(BOM).Range(bestcontractorrange).Value = Worksheets(BOM).Range(minvalrange).Offset(0, -2).Value
 
+'delete calculated distance to reduce API usage
+Worksheets(BOM).Range(rangeendcolumn & rangestartrow & ":" & rangeendcolumn & (rangestartrow + Worksheets(bomdata).Range(contractorlistrange & contractorrownumber).Offset(0, 1).Value - 1)).Value = ""
+
 End Sub
 
 
