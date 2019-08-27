@@ -1,10 +1,10 @@
-Sub AnI()
+Sub hasworkingnot()
 '===========zliczanie ulosci uzytkownikow
-userscount = 0
+USERSCOUNT = 0
 For i = 20 To 200
     If Range("A" & i).Value = "" Then   'jesli puste pole to idz dalej
     Else
-        userscount = userscount + 1  'zliaczanei ilosci uzytkownikow
+        USERSCOUNT = USERSCOUNT + 1  'zliaczanei ilosci uzytkownikow
     End If
 'nastepna komorka
 Next i
@@ -34,10 +34,11 @@ For i = 0 To (pccount - 1)  'jeden mniej bo tak wyjdzie ze podwoi jedno nazwisko
 'nastepna komorka
 Next i
 
-Range("A20:A" & (usercount + 20)).Interior.Color = xlNone
+Range("A20:A" & (USERSCOUNT + 20)).Interior.Pattern = xlNone  'gumka
+Range("B20:B" & (USERSCOUNT + 20)).Interior.Pattern = xlNone  'gumka
+Range("C20:C" & (USERSCOUNT + 20)).Value = ""  'gumka
 
-MsgBox (userscount & " + " & pccount)
-For j = 20 To (20 + userscount) ' +20 bo zaczynamy od wiersza 20
+For j = 20 To (20 + USERSCOUNT) ' +20 bo zaczynamy od wiersza 20
     For i = 1 To pccount
         If Range("I2").Offset(0, i - 1).Value = Range("A" & j).Value Then  'jezeli nazwa kompa zgadza sie z aktualnie przeszukana nazwa uzytkownika to
             'sprawdz czy uzywa kompa
@@ -56,21 +57,25 @@ For j = 20 To (20 + userscount) ' +20 bo zaczynamy od wiersza 20
     Next i
 Next j
 
-For j = 20 To (20 + userscount) ' +20 bo zaczynamy od wiersza 20
+For j = 20 To (20 + USERSCOUNT) ' +20 bo zaczynamy od wiersza 20
     For i = 1 To pccount
         If Range("I2").Offset(0, i - 1).Value = Range("A" & j).Value Then  'jezeli nazwa kompa zgadza sie z aktualnie przeszukana nazwa uzytkownika to
             'sprawdz czy uzywa kompa
             If Range("B" & j).Value = "x" Then
+            Else
                 If Range("I3").Offset(0, i - 1).Value > 0 Then 'sprawdz czy wartosc jest wieksza od zera (wiersz 3)
                     'jezeli jest aktywny to wpisz w kolumnie C active i usun kolor z kolumny A
                     Range("C" & j).Value = "intruder"
                     Range("B" & j).Interior.Color = RGB(255, 0, 0)
-                Else
-                    'jezeli nie to podswietl na zolto
-                    If Range("C" & j).Value = "intruder" Then 'sprawdz czy juz nie byl aktywny w innej kolumnie
-                    Else 'jak nie byl to koloruj
-                        Range("B" & j).Interior.Color = xlNone 'gumka
-                    End If
+                'Else
+                 '   'jezeli nie to podswietl na zolto
+                 '   If Range("C" & j).Value = "intruder" Then 'sprawdz czy juz nie byl aktywny w innej kolumnie
+                 '   Else 'jak nie byl to koloruj
+                '        If Range("C" & j).Value = "Active" Then
+                '        Else
+                 '           Range("B" & j).Interior.Color = xlNone 'gumka
+                '        End If
+                '    End If
                 End If
             End If
         End If
@@ -78,5 +83,9 @@ For j = 20 To (20 + userscount) ' +20 bo zaczynamy od wiersza 20
 Next j
 
 
+
+End Sub
+
+Sub guma()
 
 End Sub
